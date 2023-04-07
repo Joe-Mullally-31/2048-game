@@ -1,0 +1,10 @@
+.button {
+  background: #8f7a66;
+  border: var(--spacer-small) solid #8f7a66;
+  border-radius: 4px;
+  font-size: var(--spacer-medium);
+  line-height: var(--spacer-large);
+  font-weight: bold;
+  color: #f9f6f2;
+  cursor: pointer;
+}

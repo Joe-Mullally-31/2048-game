@@ -1,0 +1,13 @@
+.board {
+  position: relative;
+}
+
+.tile-container {
+  position: absolute;
+  z-index: 2;
+  margin: var(--spacer-small);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

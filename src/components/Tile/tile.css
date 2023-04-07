@@ -1,0 +1,82 @@
+.tile {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: var(--spacer-small);
+  border-radius: 4px;
+  background-color: #eee4da;
+  color: #776e65;
+  font-weight: bold;
+  font-size: 3rem;
+  transition-property: left, top, transform;
+  transition-duration: 250ms, 250ms, 100ms;
+  transform: scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile-128,
+.tile-256,
+.tile-512 {
+  font-size: 2.75rem;
+}
+
+.tile-1024,
+.tile-2048 {
+  font-size: 2rem;
+}
+
+.tile-2 {
+  background: #eee4da;
+
+}
+
+.tile-4 {
+  background: #ede0c8;
+}
+
+.tile-8 {
+  color: #f9f6f2;
+  background: #f2b179;
+}
+
+.tile-16 {
+  color: #f9f6f2;
+  background: #f59563;
+}
+
+.tile-32 {
+  color: #f9f6f2;
+  background: #f67c5f;
+}
+
+.tile-64 {
+  color: #f9f6f2;
+  background: #f65e3b;
+}
+
+.tile-128 {
+  color: #f9f6f2;
+  background: #edcf72;
+}
+
+.tile-256 {
+  color: #f9f6f2;
+  background: #edcc61;
+}
+
+.tile-512 {
+  color: #f9f6f2;
+  background: #edc850;
+}
+
+.tile-1024 {
+  color: #f9f6f2;
+  background: #edc53f;
+}
+
+.tile-2048 {
+  color: #f9f6f2;
+  background: #edc22e;
+}

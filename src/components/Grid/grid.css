@@ -1,0 +1,15 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #bbada0;
+  border: var(--spacer-small) solid #bbada0;
+  border-radius: 6px;
+}
+
+.grid-cell {
+  width: 100px;
+  height: 100px;
+  margin: var(--spacer-small);
+  border-radius: 4px;
+  background: rgba(238, 228, 218, 0.35);
+}
