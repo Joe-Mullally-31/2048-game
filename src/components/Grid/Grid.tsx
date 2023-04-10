@@ -8,13 +8,9 @@ export const Grid = () => {
 
   const renderGrid = () => {
     const length = tileCount * tileCount;
-    const cells: JSX.Element[] = [];
-
-    for (let index = 0; index < length; index += 1) {
-      cells.push(<div key={`${index}`} className={`grid-cell`} />);
-    }
-
-    return cells;
+    return Array.from(Array(length).keys()).map((i) => (
+      <div key={`${i}`} className="grid-cell" />
+    ));
   };
 
   return <div className="grid">{renderGrid()}</div>;
