@@ -80,6 +80,10 @@ export const useGame = () => {
   };
 
   const noMergesPossible = (tilesMatrix: TileInMatrix[][]) => {
+    const emptyTiles = getEmptyTiles(tilesMatrix);
+    if (emptyTiles.length > 0) {
+      return false;
+    }
     const checkForHorizontalMerges = shiftAndCombineRight(tilesMatrix);
     const checkForVerticalMerges = rotateMatrixRight<TileInMatrix>(
       shiftAndCombineRight(rotateMatrixRight(tilesMatrix)),
