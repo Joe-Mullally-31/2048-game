@@ -79,6 +79,18 @@ export const useGame = () => {
     return shiftedMatrix.map(combineLine);
   };
 
+  const getEmptyTiles = (tilesMatrix: TileInMatrix[][]) => {
+    const emptyTiles: [number, number][] = [];
+    tilesMatrix.forEach((row, rowIndex) =>
+      row.forEach((tile, colIndex) => {
+        if (tile.value === 0) {
+          emptyTiles.push([rowIndex, colIndex]);
+        }
+      })
+    );
+    return emptyTiles;
+  };
+
   const noMergesPossible = (tilesMatrix: TileInMatrix[][]) => {
     const emptyTiles = getEmptyTiles(tilesMatrix);
     if (emptyTiles.length > 0) {
@@ -93,18 +105,6 @@ export const useGame = () => {
       isEqual(tilesMatrix, checkForHorizontalMerges) &&
       isEqual(tilesMatrix, checkForVerticalMerges)
     );
-  };
-
-  const getEmptyTiles = (tilesMatrix: TileInMatrix[][]) => {
-    const emptyTiles: [number, number][] = [];
-    tilesMatrix.forEach((row, rowIndex) =>
-      row.forEach((tile, colIndex) => {
-        if (tile.value === 0) {
-          emptyTiles.push([rowIndex, colIndex]);
-        }
-      })
-    );
-    return emptyTiles;
   };
 
   const addRandomTile = (tilesMatrix: TileInMatrix[][]) => {
@@ -157,6 +157,7 @@ export const useGame = () => {
   // Randomly generate board on page load
   useEffect(() => {
     resetGame();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const move = (

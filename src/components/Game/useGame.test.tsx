@@ -2,7 +2,6 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { Direction, useGame } from "./useGame";
 import { act } from "react-dom/test-utils";
 import { TileInMatrix } from "./matrixUtils";
-import { v4 as uuidv4 } from "uuid";
 
 jest.useFakeTimers();
 jest.mock("uuid", () => ({ v4: () => undefined }));
