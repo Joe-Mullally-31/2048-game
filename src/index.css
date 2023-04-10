@@ -1,22 +1,27 @@
 :root {
-    /* spacers */
-    --spacer-small: 0.5rem;
-    --spacer-medium: 1rem;
-    --spacer-large: 1.5rem;
-    --spacer-xlarge: 2rem;
-    --spacer-xxlarge: 3rem;
+  /* spacers */
+  --spacer-small: 0.5rem;
+  --spacer-medium: 1rem;
+  --spacer-large: 1.5rem;
+  --spacer-xlarge: 2rem;
+  --spacer-xxlarge: 3rem;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #faf8ef;
+  color: #776e65;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1 {
+  font-size: 2.25rem;
+}
+
+h2 {
+  font-size: 1.5rem;
 }
