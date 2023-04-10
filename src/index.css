@@ -5,6 +5,11 @@
   --spacer-large: 1.5rem;
   --spacer-xlarge: 2rem;
   --spacer-xxlarge: 3rem;
+  --dark-grey-orange: #776e65;
+  --floral-white: #faf8ef;
+  --pearl-beige: #8f7a66;
+  --white-text: #f9f6f2;
+  --silk: #bbada0;
 }
 
 body {
@@ -14,8 +19,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #faf8ef;
-  color: #776e65;
+  background: var(--floral-white);
+  color: var(--dark-grey-orange);
 }
 
 h1 {

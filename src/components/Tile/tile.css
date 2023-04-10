@@ -5,7 +5,7 @@
   margin: var(--spacer-small);
   border-radius: 4px;
   background-color: #eee4da;
-  color: #776e65;
+  color: var(--dark-grey-orange);
   font-weight: bold;
   font-size: 3rem;
   transition-property: left, top, transform;
@@ -29,7 +29,6 @@
 
 .tile-2 {
   background: #eee4da;
-
 }
 
 .tile-4 {
@@ -37,46 +36,46 @@
 }
 
 .tile-8 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #f2b179;
 }
 
 .tile-16 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #f59563;
 }
 
 .tile-32 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #f67c5f;
 }
 
 .tile-64 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #f65e3b;
 }
 
 .tile-128 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #edcf72;
 }
 
 .tile-256 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #edcc61;
 }
 
 .tile-512 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #edc850;
 }
 
 .tile-1024 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #edc53f;
 }
 
 .tile-2048 {
-  color: #f9f6f2;
+  color: var(--white-text);
   background: #edc22e;
 }

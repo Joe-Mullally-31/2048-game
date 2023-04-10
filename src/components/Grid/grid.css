@@ -1,8 +1,8 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  background-color: #bbada0;
-  border: var(--spacer-small) solid #bbada0;
+  background-color: var(--silk);
+  border: var(--spacer-small) solid var(--silk);
   border-radius: 6px;
 }
 

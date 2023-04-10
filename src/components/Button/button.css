@@ -1,10 +1,10 @@
 .button {
-  background: #8f7a66;
-  border: var(--spacer-small) solid #8f7a66;
+  background: var(--pearl-beige);
+  border: var(--spacer-small) solid var(--pearl-beige);
   border-radius: 4px;
   font-size: var(--spacer-medium);
   line-height: var(--spacer-large);
   font-weight: bold;
-  color: #f9f6f2;
+  color: var(--white-text);
   cursor: pointer;
 }
