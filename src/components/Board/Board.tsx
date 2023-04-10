@@ -9,13 +9,11 @@ export const BOARD_MARGIN = 16;
 
 type BoardProps = {
   tilesMatrix: TileInMatrix[][];
-  tilesToHighlight: [number, number][];
   tileCountPerRow: number;
 };
 
 export const Board = ({
   tilesMatrix,
-  tilesToHighlight,
   tileCountPerRow = TILES_PER_ROW,
 }: BoardProps) => {
   const containerWidth = TILE_TOTAL_WIDTH * tileCountPerRow;

@@ -26,7 +26,6 @@ export const Tile = ({ tileInfo }: TileProps) => {
   const [scale, setScale] = useState<number>(1);
 
   const previousValue = usePrevious<number>(value);
-  console.log({ previousValue }, { value });
 
   const isNew = previousValue === undefined;
   const hasChanged = previousValue !== value;
@@ -35,10 +34,11 @@ export const Tile = ({ tileInfo }: TileProps) => {
   useEffect(() => {
     if (highlightTile) {
       setScale(1.1);
-      const timeOut = setTimeout(() => setScale(1), 100);
-      return () => clearTimeout(timeOut);
+      setTimeout(() => {
+        setScale(1);
+      }, 100);
     }
-  }, [highlightTile, scale]);
+  }, [highlightTile]);
 
   const positionToPixels = (position: number) => {
     return (position / tileCount) * containerWidth;

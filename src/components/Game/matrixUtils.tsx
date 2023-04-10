@@ -3,6 +3,10 @@ export type TileInMatrix = {
   id: string | undefined;
 };
 
+export type MergedTile = TileInMatrix & {
+    oldValue?: number | undefined
+}
+
 export const rotateMatrixRight = <T,>(
   matrix: T[][],
   numberOfRotations = 1

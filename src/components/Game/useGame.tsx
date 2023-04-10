@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import isEqual from "lodash.isequal";
 import { TILES_PER_ROW } from "../Board/BoardContext";
 import {
+  MergedTile,
   TileInMatrix,
   rotateMatrixRight,
   shiftMatrixRight,
 } from "./matrixUtils";
 import { v4 as uuidv4 } from "uuid";
+import { animationDuration } from "./Game";
 
 export enum Direction {
   UP,
@@ -21,7 +23,7 @@ export const useGame = () => {
       {
         length: TILES_PER_ROW,
       },
-      () => new Array(TILES_PER_ROW).fill({ value: 0 })
+      () => new Array(TILES_PER_ROW).fill({ value: 0, id: undefined })
     );
   const [gameOver, setGameOver] = useState(false);
   const [gameWon, setGameWon] = useState(false);
@@ -29,17 +31,11 @@ export const useGame = () => {
     buildEmptyBoard()
   );
 
-  // highlight new tiles and merged tiles
-  const [tilesToHighlight, setTilesToHighlight] = useState<[number, number][]>(
-    []
-  );
-
-  const shiftAndCombineRight = (matrix: TileInMatrix[][]) => {
+  const shiftAndCombineRight = (matrix: TileInMatrix[][]): MergedTile[][] => {
     const shiftedMatrix = shiftMatrixRight(matrix);
-    console.log({ shiftedMatrix });
 
     type CombineLineState = {
-      newRow: TileInMatrix[];
+      newRow: MergedTile[];
       lastTile: TileInMatrix | undefined;
     };
 
@@ -52,11 +48,17 @@ export const useGame = () => {
 
           if (next.value > 0 && next.value === lastTile.value) {
             return {
-              newRow: [{ value: next.value * 2, id: next.id }, ...newRow],
+              newRow: [
+                { value: next.value * 2, oldValue: next.value, id: next.id },
+                ...newRow,
+              ],
               lastTile: undefined,
             };
           }
-          return { newRow: [lastTile, ...newRow], lastTile: next };
+          return {
+            newRow: [{ ...lastTile }, ...newRow],
+            lastTile: next,
+          };
         },
         { newRow: [], lastTile: undefined }
       );
@@ -67,7 +69,7 @@ export const useGame = () => {
 
       // pad with zeros
       return [
-        ...new Array<TileInMatrix>(row.length - combinedRow.length).fill({
+        ...new Array<MergedTile>(row.length - combinedRow.length).fill({
           value: 0,
           id: undefined,
         }),
@@ -109,8 +111,6 @@ export const useGame = () => {
     const randomZeroCoordinates =
       emptyTiles[Math.round(Math.random() * (emptyTiles.length - 1))];
 
-    setTilesToHighlight([...tilesToHighlight, randomZeroCoordinates]);
-
     const newMatrix = [...tilesMatrix];
     newMatrix[randomZeroCoordinates[0]][randomZeroCoordinates[1]] = {
       value: 2,
@@ -142,6 +142,8 @@ export const useGame = () => {
   };
 
   const resetGame = () => {
+    setGameOver(false);
+    setGameWon(false);
     const initialBoard = addRandomTileAndCheckGameState(
       addRandomTileAndCheckGameState(buildEmptyBoard())
     );
@@ -159,11 +161,9 @@ export const useGame = () => {
       tilesMatrix: TileInMatrix[][]
     ) => TileInMatrix[][] = addRandomTileAndCheckGameState
   ) => {
-    setTilesToHighlight([]);
-
-    let newTilesMatrix: TileInMatrix[][];
+    let newTilesMatrix: MergedTile[][];
     let rotatedMatrix: TileInMatrix[][];
-    let combinedMatrix: TileInMatrix[][];
+    let combinedMatrix: MergedTile[][];
 
     switch (direction) {
       case Direction.RIGHT:
@@ -189,8 +189,27 @@ export const useGame = () => {
     if (isEqual(newTilesMatrix, tilesMatrix)) {
       return;
     }
-    const newTilesMatrixWithNewTile = addTileAndCheckGameState(newTilesMatrix);
-    setTilesMatrix(newTilesMatrixWithNewTile);
+    const preCombinationMatrix = newTilesMatrix.map((row) =>
+      row.map((merged) => ({
+        value: merged.oldValue ?? merged.value,
+        id: merged.id,
+      }))
+    );
+    const postCombinationMatrix = newTilesMatrix.map((row) =>
+      row.map((merged) => ({
+        value: merged.value,
+        id: merged.id,
+      }))
+    );
+    setTilesMatrix(preCombinationMatrix);
+    const newTilesMatrixWithNewTile = addTileAndCheckGameState(
+      postCombinationMatrix
+    );
+    // Allow the slide animation to complete
+    setTimeout(
+      () => setTilesMatrix(newTilesMatrixWithNewTile),
+      animationDuration
+    );
   };
 
   return {
@@ -200,6 +219,5 @@ export const useGame = () => {
     gameOver,
     gameWon,
     resetGame,
-    tilesToHighlight,
   };
 };

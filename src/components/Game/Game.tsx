@@ -5,11 +5,12 @@ import { Board } from "../Board/Board";
 import { Direction, useGame } from "./useGame";
 import { TILES_PER_ROW } from "../Board/BoardContext";
 import { Button } from "../Button/Button";
+import "./game.css";
 
 export const animationDuration = 250;
 
 export const Game = () => {
-  const { tilesMatrix, move, gameOver, gameWon, resetGame, tilesToHighlight } = useGame();
+  const { tilesMatrix, move, gameOver, gameWon, resetGame } = useGame();
 
   const handleKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
@@ -54,7 +55,25 @@ export const Game = () => {
           <Button onClick={resetGame}>Restart</Button>
         </div>
       </div>
-      <Board tilesMatrix={tilesMatrix} tilesToHighlight= {tilesToHighlight} tileCountPerRow={TILES_PER_ROW} />
+      <Board tilesMatrix={tilesMatrix} tileCountPerRow={TILES_PER_ROW} />
+      {gameOver && (
+        <>
+          <div className="modal-overlay"></div>
+          <div className="modal">
+            <h2>Game Over</h2>
+            <Button onClick={resetGame}>Restart</Button>
+          </div>
+        </>
+      )}
+      {gameWon && (
+        <>
+          <div className="modal-overlay"></div>
+          <div className="modal">
+            <h2>You won!</h2>
+            <Button onClick={resetGame}>Restart</Button>
+          </div>
+        </>
+      )}
     </>
   );
 };
