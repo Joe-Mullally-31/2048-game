@@ -9,11 +9,10 @@ const TILE_MARGIN = 16;
 export const TILE_TOTAL_WIDTH = TILE_WIDTH + TILE_MARGIN;
 
 export type TileInfo = {
-  id: number;
+  id: string | undefined;
   xPosition: number;
   yPosition: number;
   value: number;
-  mergeWith?: number;
 };
 
 type TileProps = {
@@ -21,12 +20,13 @@ type TileProps = {
 };
 
 export const Tile = ({ tileInfo }: TileProps) => {
-  const { value, xPosition, yPosition, id } = tileInfo;
+  const { value, xPosition, yPosition } = tileInfo;
   const { containerWidth, tileCount } = useContext(BoardContext);
 
   const [scale, setScale] = useState<number>(1);
 
   const previousValue = usePrevious<number>(value);
+  console.log({ previousValue }, { value });
 
   const isNew = previousValue === undefined;
   const hasChanged = previousValue !== value;
@@ -48,7 +48,6 @@ export const Tile = ({ tileInfo }: TileProps) => {
     top: positionToPixels(yPosition),
     left: positionToPixels(xPosition),
     transform: `scale(${scale})`,
-    zIndex: id,
   };
 
   return (

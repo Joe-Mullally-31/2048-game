@@ -2,29 +2,30 @@ import React, { useEffect } from "react";
 import { useThrottledCallback } from "use-debounce";
 
 import { Board } from "../Board/Board";
-import { useGame } from "./useGame";
+import { Direction, useGame } from "./useGame";
 import { TILES_PER_ROW } from "../Board/BoardContext";
+import { Button } from "../Button/Button";
 
 export const animationDuration = 250;
 
 export const Game = () => {
-  const {tiles, moveLeft, moveRight, moveUp, moveDown} = useGame();
+  const { tilesMatrix, move, gameOver, gameWon, resetGame, tilesToHighlight } = useGame();
 
   const handleKeyDown = (e: KeyboardEvent) => {
     e.preventDefault();
 
     switch (e.code) {
       case "ArrowLeft":
-        moveLeft();
+        move(Direction.LEFT);
         break;
       case "ArrowRight":
-        moveRight();
+        move(Direction.RIGHT);
         break;
       case "ArrowUp":
-        moveUp();
+        move(Direction.UP);
         break;
       case "ArrowDown":
-        moveDown();
+        move(Direction.DOWN);
         break;
     }
   };
@@ -43,5 +44,17 @@ export const Game = () => {
     };
   }, [throttledHandleKeyDown]);
 
-  return <Board tiles={tiles} tileCountPerRow={TILES_PER_ROW} />;
+  return (
+    <>
+      <div className="header">
+        <div>
+          <h1>Play 2048</h1>
+        </div>
+        <div>
+          <Button onClick={resetGame}>Restart</Button>
+        </div>
+      </div>
+      <Board tilesMatrix={tilesMatrix} tilesToHighlight= {tilesToHighlight} tileCountPerRow={TILES_PER_ROW} />
+    </>
+  );
 };
